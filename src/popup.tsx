@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { printCustomEvents } from "./injects/printCustomEvents"
 
 const Popup = () => {
   const [count, setCount] = useState(0);
@@ -38,11 +39,12 @@ const Popup = () => {
     });
   };
 
-  const printCustomEvents = async () => {
+  const envokePrintCustomEvents = async () => {
     chrome.scripting.executeScript({
       target: {tabId: (await getCurrentTab()).id as number},
       world: 'MAIN',
-      files: ['js-functions/printCustomEvents.js'],
+      func: printCustomEvents,
+      args: [],
     })
   }
 
@@ -59,7 +61,7 @@ const Popup = () => {
         count up
       </button>
       <button onClick={changeBackground}>change background</button>
-      <button onClick={printCustomEvents}>print custom events</button>
+      <button onClick={envokePrintCustomEvents}>print custom events</button>
     </>
   );
 };
