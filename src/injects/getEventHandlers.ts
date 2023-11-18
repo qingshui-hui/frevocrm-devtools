@@ -3,11 +3,11 @@
  * Gets all event-handlers from a DOM element.
  * Events with namespace are allowed.
  *
- * @param  {Element} node: DOM element
+ * @param  {Element} element: DOM element
  * @param  {String} eventns: (optional) name of the event/namespace
  * @return {Object}
  */
-function getEventHandlers(element, eventns) {
+export function getEventHandlers(element, eventns) {
     const $ = window.jQuery;
     const i = (eventns || '').indexOf('.'),
         event = i > -1 ? eventns.substr(0, i) : eventns,
@@ -36,8 +36,4 @@ function getEventHandlers(element, eventns) {
         }
     }
     return handlers;
-}
-
-export {
-    getEventHandlers
 }

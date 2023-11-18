@@ -4,7 +4,7 @@
  * chrome.scripting.executeScript with world: 'MAIN'
  */
 
-function printCustomEvents() {
+export function printCustomEvents() {
   const events = window.jQuery._data( app.event.el[0], "events" )
   Object.values(events).forEach((eventList) => {
     eventList.forEach((/** @type {Event} */e) => {
@@ -15,8 +15,4 @@ function printCustomEvents() {
       console.log(eventName, {handler: e.handler})
     })
   })
-}
-
-export {
-  printCustomEvents
 }

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-function hilightClickEvents() {
+export function hilightClickEvents() {
     frevo.getEventHandlers(document, 'click').click.forEach((/** @type {Event} */ event) => {
         console.log(event);
         let eventName = event.type
@@ -36,8 +36,4 @@ function hilightClickEvents() {
             }
         })
     })
-}
-
-export {
-    hilightClickEvents
 }
