@@ -24,12 +24,17 @@
   "externally_connectable": {
     "matches": ["<all_urls>"]
   },
+  "web_accessible_resources": [{
+    "resources": ["js/inject.js"],
+    "matches": ["<all_urls>"]
+  }],
   "background": {
     "service_worker": "js/background.js"
   },
   "permissions": [
     "storage",
-    "scripting"
+    "scripting",
+    "contextMenus"
   ],
   "host_permissions": [
     "http://localhost/*"

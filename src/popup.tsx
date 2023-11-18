@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { printCustomEvents } from "./injects/printCustomEvents"
+import { hilightClickEvents } from "./injects/hilightClickEvents";
+import { getCurrentTab } from "./utils";
 
 const Popup = () => {
   const [count, setCount] = useState(0);
@@ -15,12 +17,6 @@ const Popup = () => {
       setCurrentURL(tabs[0].url);
     });
   }, []);
-
-
-  const getCurrentTab = async () => {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
-    return tabs[0];
-  }
 
   const changeBackground = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -44,23 +40,22 @@ const Popup = () => {
       target: {tabId: (await getCurrentTab()).id as number},
       world: 'MAIN',
       func: printCustomEvents,
+    })
+  }
+  const envokeHilightClickEvents = async () => {
+    chrome.scripting.executeScript({
+      target: {tabId: (await getCurrentTab()).id as number},
+      world: 'MAIN',
+      func: hilightClickEvents,
       args: [],
     })
   }
 
   return (
     <>
-      <ul style={{ minWidth: "700px" }}>
-        <li>Current URL: {currentURL}</li>
-        <li>Current Time: {new Date().toLocaleTimeString()}</li>
-      </ul>
-      <button
-        onClick={() => setCount(count + 1)}
-        style={{ marginRight: "5px" }}
-      >
-        count up
-      </button>
+      <div style={{ minWidth: "300px" }}></div>
       <button onClick={changeBackground}>change background</button>
+      <button onClick={envokeHilightClickEvents}>hilight click events</button>
       <button onClick={envokePrintCustomEvents}>print custom events</button>
     </>
   );
