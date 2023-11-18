@@ -1,7 +1,7 @@
 {
-  "name": "chrome-extension-typescript-starter",
+  "name": "frevocrm-devtools",
   "version": "1.0.0",
-  "description": "chrome-extension-typescript-starter",
+  "description": "frevocrm-devtools",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --config webpack/webpack.dev.js --watch",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chibat/chrome-extension-typescript-starter.git"
+    "url": "https://github.com/chibat/frevocrm-devtools.git"
   },
   "dependencies": {
     "css-selector-generator": "^3.6.6",

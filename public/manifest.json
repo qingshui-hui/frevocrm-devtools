@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "FrevoCRM Developer Tool",
+  "name": "F-RevoCRM Devtools",
   "description": "Chrome Extension, TypeScript, Visual Studio Code",
   "version": "1.0",
   "options_ui": {
