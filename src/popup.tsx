@@ -5,35 +5,6 @@ import { hilightClickEvents } from "./injects/hilightClickEvents";
 import { getCurrentTab } from "./utils";
 
 const Popup = () => {
-  const [count, setCount] = useState(0);
-  const [currentURL, setCurrentURL] = useState<string>();
-
-  useEffect(() => {
-    chrome.action.setBadgeText({ text: count.toString() });
-  }, [count]);
-
-  useEffect(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      setCurrentURL(tabs[0].url);
-    });
-  }, []);
-
-  const changeBackground = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const tab = tabs[0];
-      if (tab.id) {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            color: "#555555",
-          },
-          (msg) => {
-            console.log("result message:", msg);
-          }
-        );
-      }
-    });
-  };
 
   const envokePrintCustomEvents = async () => {
     chrome.scripting.executeScript({
@@ -53,10 +24,12 @@ const Popup = () => {
 
   return (
     <>
-      <div style={{ minWidth: "300px" }}></div>
-      <button onClick={changeBackground}>change background</button>
-      <button onClick={envokeHilightClickEvents}>hilight click events</button>
-      <button onClick={envokePrintCustomEvents}>print custom events</button>
+      <div style={{ width: '140px' }}>
+        <button onClick={envokeHilightClickEvents}>hilight click events</button>
+      </div>
+      <div style={{ marginTop: '4px' }}>
+        <button onClick={envokePrintCustomEvents}>print custom events</button>
+      </div>
     </>
   );
 };
