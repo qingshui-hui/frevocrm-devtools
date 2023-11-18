@@ -15,6 +15,12 @@ const Popup = () => {
     });
   }, []);
 
+
+  const getCurrentTab = async () => {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
+    return tabs[0];
+  }
+
   const changeBackground = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       const tab = tabs[0];
@@ -32,6 +38,14 @@ const Popup = () => {
     });
   };
 
+  const printCustomEvents = async () => {
+    chrome.scripting.executeScript({
+      target: {tabId: (await getCurrentTab()).id as number},
+      world: 'MAIN',
+      files: ['js-functions/printCustomEvents.js'],
+    })
+  }
+
   return (
     <>
       <ul style={{ minWidth: "700px" }}>
@@ -45,6 +59,7 @@ const Popup = () => {
         count up
       </button>
       <button onClick={changeBackground}>change background</button>
+      <button onClick={printCustomEvents}>print custom events</button>
     </>
   );
 };
