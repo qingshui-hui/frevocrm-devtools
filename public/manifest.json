@@ -21,9 +21,6 @@
       ]
     }
   ],
-  "externally_connectable": {
-    "matches": ["<all_urls>"]
-  },
   "web_accessible_resources": [{
     "resources": ["js/inject.js"],
     "matches": ["<all_urls>"]
