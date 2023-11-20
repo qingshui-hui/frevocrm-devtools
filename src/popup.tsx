@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { printCustomEvents } from "./injects/printCustomEvents"
 import { hilightClickEvents } from "./injects/hilightClickEvents";
 import { getCurrentTab } from "./utils";
+import { printFieldNames } from "./injects/printFieldNames";
 
 const Popup = () => {
 
@@ -21,6 +22,13 @@ const Popup = () => {
       args: [],
     })
   }
+  const envokePrintFieldNames = async () => {
+    chrome.scripting.executeScript({
+      target: {tabId: (await getCurrentTab()).id as number},
+      world: 'MAIN',
+      func: printFieldNames,
+    })
+  }
 
   return (
     <>
@@ -29,6 +37,9 @@ const Popup = () => {
       </div>
       <div style={{ marginTop: '4px' }}>
         <button onClick={envokePrintCustomEvents}>print custom events</button>
+      </div>
+      <div style={{ marginTop: '4px' }}>
+        <button onClick={envokePrintFieldNames}>print field names</button>
       </div>
     </>
   );
